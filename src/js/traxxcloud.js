@@ -6,12 +6,12 @@ SC.initialize({
 SC.connect().then(function() {
   SC.get('/me/activities/tracks/affiliated').then(function(tracks) {
     tracks.collection.forEach(function(entry) {
-      console.log(entry);
       // origin can be null, sometimes...
       if (entry.origin) {
         var data = entry.origin;
+        var artwork = (data.artwork_url) ? data.artwork_url : 'img/no-pic.jpg';
         $('#traxxs').append('<tr>\
-            <td><img src="' + data.artwork_url + '" /></td>\
+            <td><img src="' + artwork + '" /></td>\
             <td>' +  data.user.username + '</td>\
             <td>' + data.title + '</td>\
             <td class="text-right">' + convertDuration(data.duration) + '</td>\
